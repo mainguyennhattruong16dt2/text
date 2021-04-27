@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bài tập testing</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+</head>
+<body>
+	<div class="container_1">
+		<div class="container_heading">
+			<h1>FREEMIND</h1>
+			<h5>Hãy gửi CV cho chúng tôi</h5>
+		</div>
+		<form id="form" >
+		<div class="div">
+			<label  class="form_ten">Tên của bạn:</label>
+			<input id="name" class="input_ten" type="textbox" name="" required placeholder="Ví dụ:Nguyễn Văn A">
+		</div>
+		<div class="div">
+			<label  class="form_ten">Số Điện Thoại:</label>
+			<input id="phone" class="input_ten" type="textbox" name="" required placeholder="Số điện thoại liên lạc của bạn" pattern="(\+84|0)\d{9,11}">
+		</div>
+		<div class="div">
+			<label  class="form_ten">Vị trí:</label>
+			<input id="position" class="input_ten" type="textbox" name="" required placeholder="Junior Ecommerce Web Developer">
+		</div>
+		<div class="div">
+			<label class="form_ten">Kinh nghiệm làm việc:</label>
+			<textarea id="textarea" class="input_ten">
+				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard d scrambled it to make a type specimen book.
+			</textarea>
+
+
+		</div>
+		<div class="div">
+			<label  class="form_ten">Email:</label>
+			<input id="email" class="input_ten" type="emal" name="" placeholder="email@gmail.com" required>
+		</div>
+		<div class="div">
+			<label  class="form_ten" for="myfile">Chọn file ảnh:</label>
+			 <input id="photo" type="file" name="photo" id="photo" accept="image/*" />
+		</div>
+		<div class="bottom_btn">
+		
+		<input type="submit" name="" class="btn btn-primary" value="Gửi CV cho chúng tôi">
+	</div>
+		</form>
+	</div>	
+
+<script type="text/javascript">
+	var form=document.getElementById('form')
+	form.addEventListener('submit',function(e){
+		e.preventDefault()
+		var name=document.getElementById('name').value
+		var  position=document.getElementById('position').value
+		var number=document.getElementById('phone').value
+		var email=document.getElementById('email').value
+		var picture=document.getElementById('photo').value
+		var areatex=document.getElementById('textarea').value
+
+
+		fetch('https://freemind-test.netlify.app/.netlify/functions/test',{
+			method:'POST',
+			body:JSON.stringify({
+				name:name,
+				position:position,
+				number:number,
+				email:email,
+				picture:picture,
+				areatex:areatex
+			}),
+			headers:{
+				"Content-Type":"application/json;charset=UTF-8"
+			}
+		})
+		.then(function(response){
+			return response.json()
+		}).then(function(data){
+			console.log(data)
+		})
+	})
+</script>
+
+</body>
+</html>
